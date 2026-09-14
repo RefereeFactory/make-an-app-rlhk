@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Lettuce Almanac — A Loving Guide to Leaves</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --leaf:#4f772d;
+    --leaf-deep:#31572c;
+    --leaf-light:#90a955;
+    --cream:#fefae0;
+    --cream-soft:#f7f6ea;
+    --ink:#2b3a1f;
+    --blush:#e9edc9;
+    --shadow:0 12px 30px rgba(49,87,44,.14);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Nunito Sans',system-ui,sans-serif;
+    color:var(--ink);
+    background:var(--cream);
+    line-height:1.65;
+  }
+  h1,h2,h3,.serif{font-family:'Fraunces',Georgia,serif}
+  a{color:var(--leaf-deep)}
+  img{max-width:100%;display:block}
+
+  /* ---------- HERO ---------- */
+  header.hero{
+    position:relative;
+    background:
+      radial-gradient(120% 120% at 80% 0%, rgba(144,169,85,.35), transparent 60%),
+      linear-gradient(160deg,#e9edc9 0%, #d8e6b5 55%, #cfe1a8 100%);
+    padding:clamp(3rem,8vw,6rem) 1.25rem clamp(4rem,9vw,7rem);
+    overflow:hidden;
+    text-align:center;
+  }
+  .hero .leaves{position:absolute;inset:0;pointer-events:none;font-size:2.5rem;opacity:.35}
+  .hero .leaves span{position:absolute;animation:drift 9s ease-in-out infinite}
+  .hero .leaves span:nth-child(1){top:12%;left:8%;animation-delay:0s}
+  .hero .leaves span:nth-child(2){top:60%;left:14%;animation-delay:1.5s}
+  .hero .leaves span:nth-child(3){top:25%;right:10%;animation-delay:.8s}
+  .hero .leaves span:nth-child(4){top:70%;right:16%;animation-delay:2.2s}
+  @keyframes drift{0%,100%{transform:translateY(0) rotate(-6deg)}50%{transform:translateY(-16px) rotate(8deg)}}
+  .hero-badge{
+    display:inline-block;background:var(--leaf-deep);color:var(--cream);
+    padding:.35rem 1rem;border-radius:999px;font-size:.8rem;font-weight:700;
+    letter-spacing:.08em;text-transform:uppercase;margin-bottom:1.25rem;position:relative;
+  }
+  .hero h1{
+    font-size:clamp(2.4rem,7vw,4.6rem);
+    line-height:1.05;font-weight:600;color:var(--leaf-deep);
+    max-width:14ch;margin:0 auto;position:relative;
+  }
+  .hero p.lede{
+    font-size:clamp(1.05rem,2.4vw,1.35rem);
+    max-width:52ch;margin:1.25rem auto 0;color:#40532b;position:relative;
+  }
+  .cta-row{margin-top:2rem;display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap;position:relative}
+  .btn{
+    font-family:inherit;font-size:1rem;font-weight:700;cursor:pointer;
+    border:none;border-radius:999px;padding:.85rem 1.6rem;min-height:48px;
+    transition:transform .15s ease, box-shadow .15s ease, background .2s;
+    text-decoration:none;display:inline-flex;align-items:center;gap:.5rem;
+  }
+  .btn-primary{background:var(--leaf);color:#fff;box-shadow:var(--shadow)}
+  .btn-primary:hover{transform:translateY(-2px);background:var(--leaf-deep)}
+  .btn-ghost{background:rgba(255,255,255,.6);color:var(--leaf-deep);border:2px solid var(--leaf)}
+  .btn-ghost:hover{transform:translateY(-2px);background:#fff}
+
+  /* ---------- LAYOUT ---------- */
+  main{max-width:1100px;margin:0 auto;padding:0 1.25rem}
+  section{padding:clamp(3rem,7vw,5rem) 0}
+  .section-head{text-align:center;max-width:60ch;margin:0 auto 2.5rem}
+  .section-head h2{font-size:clamp(1.8rem,4.5vw,2.8rem);color:var(--leaf-deep);font-weight:600}
+  .section-head p{margin-top:.6rem;color:#4a5a38;font-size:1.05rem}
+  .eyebrow{color:var(--leaf);font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:.8rem}
+
+  /* ---------- VARIETIES ---------- */
+  .filter-bar{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center;margin-bottom:2rem}
+  .chip{
+    font-family:inherit;font-size:.9rem;font-weight:700;cursor:pointer;
+    border:2px solid var(--leaf-light);background:#fff;color:var(--leaf-deep);
+    padding:.5rem 1.1rem;border-radius:999px;min-height:44px;transition:.15s;
+  }
+  .chip:hover{border-color:var(--leaf)}
+  .chip.active{background:var(--leaf);color:#fff;border-color:var(--leaf)}
+  .search-wrap{max-width:420px;margin:0 auto 1.5rem;position:relative}
+  .search-wrap input{
+    width:100%;padding:.85rem 1rem .85rem 2.8rem;font-family:inherit;font-size:1rem;
+    border:2px solid var(--blush);border-radius:14px;background:#fff;color:var(--ink);
+  }
+  .search-wrap input:focus{outline:none;border-color:var(--leaf)}
+  .search-wrap .mag{position:absolute;left:1rem;top:50%;transform:translateY(-50%);font-size:1.1rem}
+  .grid{display:grid;gap:1.4rem;grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
+  .card{
+    background:#fff;border-radius:20px;overflow:hidden;box-shadow:var(--shadow);
+    display:flex;flex-direction:column;transition:transform .18s ease;border:1px solid #eef0dd;
+  }
+  .card:hover{transform:translateY(-4px)}
+  .card .emoji-top{
+    height:110px;display:flex;align-items:center;justify-content:center;font-size:3.4rem;
+    background:linear-gradient(135deg,var(--blush),#d6e6b0);
+  }
+  .card .body{padding:1.25rem 1.3rem 1.4rem;flex:1;display:flex;flex-direction:column}
+  .card h3{font-size:1.3rem;color:var(--leaf-deep)}
+  .card .tag{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--leaf);margin:.3rem 0 .6rem}
+  .card p.desc{font-size:.95rem;color:#465438;flex:1}
+  .card .meta{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.9rem}
+  .card .meta span{background:var(--cream-soft);border-radius:8px;padding:.25rem .55rem;font-size:.75rem;font-weight:600}
+  .fav-btn{
+    margin-top:1rem;align-self:flex-start;background:none;border:2px solid var(--leaf-light);
+    border-radius:999px;padding:.45rem 1rem;font-family:inherit;font-weight:700;cursor:pointer;
+    color:var(--leaf-deep);min-height:44px;transition:.15s;font-size:.85rem;
+  }
+  .fav-btn:hover{background:var(--blush)}
+  .fav-btn.on{background:var(--leaf);color:#fff;border-color:var(--leaf)}
+  .empty{text-align:center;color:#6a7658;padding:2rem;grid-column:1/-1;font-style:italic}
+
+  /* ---------- FACTS STRIP ---------- */
+  .facts{background:var(--leaf-deep);color:var(--cream);border-radius:24px;padding:clamp(2rem,5vw,3rem)}
+  .facts h2{color:#fff;text-align:center;margin-bottom:2rem;font-weight:600;font-size:clamp(1.6rem,4vw,2.4rem)}
+  .fact-grid{display:grid;gap:1.5rem;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));text-align:center}
+  .fact-grid .num{font-family:'Fraunces',serif;font-size:2.6rem;color:var(--leaf-light);font-weight:600}
+  .fact-grid p{font-size:.95rem;opacity:.9;margin-top:.3rem}
+
+  /* ---------- NUTRITION / TABS ---------- */
+  .panel{background:#fff;border-radius:20px;box-shadow:var(--shadow);padding:clamp(1.5rem,4vw,2.5rem);border:1px solid #eef0dd}
+  .tab-row{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.5rem}
+  .tab{font-family:inherit;font-weight:700;cursor:pointer;background:var(--cream-soft);border:none;
+    padding:.7rem 1.2rem;border-radius:12px;color:var(--ink);min-height:44px;transition:.15s;font-size:.95rem}
+  .tab.active{background:var(--leaf);color:#fff}
+  .tab-content{display:none;animation:fade .3s ease}
+  .tab-content.show{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  .tab-content ul{list-style:none;display:grid;gap:.7rem}
+  .tab-content li{padding-left:1.6rem;position:relative}
+  .tab-content li::before{content:"🌱";position:absolute;left:0}
+
+  /* ---------- GROW CALCULATOR ---------- */
+  .grow-form{display:grid;gap:1rem;max-width:480px;margin:0 auto}
+  .grow-form label{font-weight:700;font-size:.9rem;display:block;margin-bottom:.3rem}
+  .grow-form select,.grow-form input[type=date]{
+    width:100%;padding:.75rem;border:2px solid var(--blush);border-radius:12px;
+    font-family:inherit;font-size:1rem;background:#fff;color:var(--ink);
+  }
+  .grow-form select:focus,.grow-form input:focus{outline:none;border-color:var(--leaf)}
+  .grow-result{margin-top:1.5rem;background:var(--blush);border-radius:16px;padding:1.3rem;text-align:center;display:none}
+  .grow-result.show{display:block}
+  .grow-result strong{color:var(--leaf-deep);font-size:1.15rem}
+
+  /* ---------- NOTES ---------- */
+  .note-form{display:grid;gap:.8rem;max-width:560px;margin:0 auto 1.5rem}
+  .note-form input,.note-form textarea{
+    width:100%;padding:.8rem;border:2px solid var(--blush);border-radius:12px;
+    font-family:inherit;font-size:1rem;background:#fff;color:var(--ink);resize:vertical;
+  }
+  .note-form input:focus,.note-form textarea:focus{outline:none;border-color:var(--leaf)}
+  .save-status{text-align:center;font-size:.85rem;color:var(--leaf);font-weight:700;min-height:1.2rem}
+  .note-list{display:grid;gap:1rem;max-width:640px;margin:0 auto}
+  .note{background:#fff;border-radius:14px;padding:1.1rem 1.3rem;box-shadow:var(--shadow);border:1px solid #eef0dd}
+  .note h4{color:var(--leaf-deep);font-family:'Fraunces',serif;font-size:1.1rem}
+  .note .when{font-size:.75rem;color:#8a9678;margin:.15rem 0 .5rem}
+  .note p{font-size:.95rem;white-space:pre-wrap}
+  .note .del{background:none;border:none;color:#b4553a;font-weight:700;cursor:pointer;margin-top:.6rem;font-size:.85rem;padding:.3rem 0}
+
+  /* ---------- HOW IT WORKS ---------- */
+  .how{background:var(--cream-soft);border-radius:24px;padding:clamp(1.8rem,5vw,3rem)}
+  .how ol{max-width:60ch;margin:1rem auto 0;padding-left:1.2rem;display:grid;gap:.6rem}
+  .how li{padding-left:.3rem}
+
+  footer{text-align:center;padding:3rem 1.25rem 2.5rem;color:#6a7658;font-size:.9rem}
+  footer .love{color:var(--leaf);font-weight:700}
+
+  @media(max-width:600px){
+    section{padding:2.5rem 0}
+  }
+</style>
+<script id="factory-store-sdk">
+window.factory=(function(){
+var K="1245082d-10e6-457e-b1bf-e94adde8d779",U="https://canvbkibjgcnqowjtarf.supabase.co/functions/v1/app-market",A="sb_publishable_sMTQKIeFgT1vwjHnU7Gexg_8CCmhtxs";
+function call(b){b.appKey=K;return fetch(U,{method:"POST",headers:{"Content-Type":"application/json","Authorization":"Bearer "+A},body:JSON.stringify(b)}).then(function(r){return r.json().then(function(d){if(!r.ok)throw new Error(d.error||("store "+r.status));return d;});});}
+var S={
+put:function(c,i,d){return call({op:"put",collection:c,id:String(i),data:d}).then(function(x){return x.doc?x.doc.data:null;});},
+get:function(c,i){return call({op:"get",collection:c,id:String(i)}).then(function(x){return x.doc?x.doc.data:null;});},
+list:function(c){return call({op:"list",collection:c}).then(function(x){return x.docs.map(function(d){return d.data;});});},
+remove:function(c,i){return call({op:"delete",collection:c,id:String(i)}).then(function(){return true;});},
+unlock:function(code){return call({op:"redeem",code:String(code)}).then(function(x){try{localStorage.setItem("factory_access",x.status);}catch(e){}return x.status;});},
+access:function(){try{return localStorage.getItem("factory_access")||"none";}catch(e){return "none";}}
+};
+var _c=null;try{var h=(location.hash||"").match(/factory_code=([a-z0-9-]+)/i);_c=h?h[1]:localStorage.getItem("factory_code");if(h){history.replaceState(null,"",location.pathname+location.search);}}catch(e){}
+var F={put:S.put,get:S.get,list:S.list,remove:S.remove,unlock:S.unlock,access:S.access};
+F.ready=_c?S.unlock(_c).then(function(s){try{if(s!=="invalid")localStorage.setItem("factory_code",_c);}catch(e){}return s;}).catch(function(){return S.access();}):Promise.resolve(S.access());
+return F;})();
+</script>
+</head>
+<body>
+
+<header class="hero">
+  <div class="leaves" aria-hidden="true"><span>🥬</span><span>🌿</span><span>🥗</span><span>🍃</span></div>
+  <span class="hero-badge">The Lettuce Almanac</span>
+  <h1>A loving field guide to the humble leaf</h1>
+  <p class="lede">Crisp, tender, peppery or sweet — lettuce is one of humanity's oldest and kindest crops. Explore the varieties, learn to grow your own, and keep your tasting notes forever.</p>
+  <div class="cta-row">
+    <a class="btn btn-primary" href="#varieties">🥬 Meet the varieties</a>
+    <a class="btn btn-ghost" href="#grow">🌱 Plan a planting</a>
+  </div>
+</header>
+
+<main>
+
+  <!-- INTRO FACTS -->
+  <section>
+    <div class="facts">
+      <h2>Lettuce, at a glance</h2>
+      <div class="fact-grid">
+        <div><div class="num">~4,500</div><p>years humans have cultivated lettuce, from ancient Egypt onward</p></div>
+        <div><div class="num">95%</div><p>of a lettuce leaf is water — nature's crunchiest hydration</p></div>
+        <div><div class="num">6</div><p>broad families: crisphead, butterhead, romaine, leaf, stem &amp; oilseed</p></div>
+        <div><div class="num">2</div><p>weeks is all many leaf varieties need before the first harvest</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VARIETIES -->
+  <section id="varieties">
+    <div class="section-head">
+      <span class="eyebrow">The Collection</span>
+      <h2>Explore lettuce varieties</h2>
+      <p>Search, filter by type, and tap the heart to save favourites. Your favourites are remembered for everyone who visits.</p>
+    </div>
+
+    <div class="search-wrap">
+      <span class="mag" aria-hidden="true">🔍</span>
+      <label for="search" class="sr-only" style="position:absolute;left:-9999px">Search lettuce varieties</label>
+      <input id="search" type="search" placeholder="Search by name or flavour…">
+    </div>
+
+    <div class="filter-bar" id="filterBar" role="group" aria-label="Filter by lettuce type"></div>
+
+    <div class="grid" id="varietyGrid"></div>
+  </section>
+
+  <!-- NUTRITION & USES -->
+  <section>
+    <div class="section-head">
+      <span class="eyebrow">Good to know</span>
+      <h2>Nourishment &amp; kitchen wisdom</h2>
+    </div>
+    <div class="panel">
+      <div class="tab-row" id="tabRow">
+        <button class="tab active" data-tab="nutrition">🌿 Nutrition</button>
+        <button class="tab" data-tab="kitchen">🍽️ In the kitchen</button>
+        <button class="tab" data-tab="keep">❄️ Keeping it fresh</button>
+        <button class="tab" data-tab="myths">💬 Myths &amp; truths</button>
+      </div>
+
+      <div class="tab-content show" id="tab-nutrition">
+        <ul>
+          <li>Rich in water and fibre, lettuce is gentle on digestion and wonderfully hydrating.</li>
+          <li>Darker leaves (romaine, red-leaf) carry more vitamins A and K than pale crispheads.</li>
+          <li>Folate in the leaves supports healthy cells — a quiet gift in every salad.</li>
+          <li>Very low in calories, so it stretches a meal generously and kindly.</li>
+        </ul>
+      </div>
+      <div class="tab-content" id="tab-kitchen">
+        <ul>
+          <li>Crisphead and romaine hold up to warm dressings, grilling and Caesar salads.</li>
+          <li>Butterhead's soft leaves make elegant wraps and cups for fillings.</li>
+          <li>Loose-leaf types shine raw — dress them just before serving so they stay perky.</li>
+          <li>Tear leaves by hand rather than cutting to keep the edges from browning.</li>
+        </ul>
+      </div>
+      <div class="tab-content" id="tab-keep">
+        <ul>
+          <li>Wash, spin dry, then wrap loosely in a clean towel inside a container.</li>
+          <li>Store in the fridge's crisper drawer, away from apples and bananas (their ethylene wilts leaves).</li>
+          <li>Revive a limp head by soaking torn leaves in ice water for 15 minutes.</li>
+          <li>Most lettuce keeps its best crunch for 5–7 days when stored dry and cool.</li>
+        </ul>
+      </div>
+      <div class="tab-content" id="tab-myths">
+        <ul>
+          <li><strong>Myth:</strong> "Lettuce has no nutrition." <strong>Truth:</strong> darker leaves are full of vitamins A and K.</li>
+          <li><strong>Myth:</strong> "All lettuce tastes the same." <strong>Truth:</strong> flavours range from sweet butterhead to peppery leaf types.</li>
+          <li><strong>Myth:</strong> "You can't grow it indoors." <strong>Truth:</strong> leaf lettuce thrives on a bright windowsill.</li>
+          <li><strong>Myth:</strong> "Bolted lettuce is ruined." <strong>Truth:</strong> it turns bitter, but the seeds it makes will feed next season.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- GROW CALCULATOR -->
+  <section id="grow">
+    <div class="section-head">
+      <span class="eyebrow">Get planting</span>
+      <h2>Plan your harvest</h2>
+      <p>Pick a type and a sowing date — we'll estimate when your leaves will be ready to pick.</p>
+    </div>
+    <div class="panel">
+      <div class="grow-form">
+        <div>
+          <label for="growType">Lettuce type</label>
+          <select id="growType">
+            <option value="30">Loose-leaf — quick and generous (~30 days)</option>
+            <option value="55">Butterhead — soft and sweet (~55 days)</option>
+            <option value="65">Romaine / Cos — upright and crisp (~65 days)</option>
+            <option value="75">Crisphead / Iceberg — patient and dense (~75 days)</option>
+          </select>
+        </div>
+        <div>
+          <label for="sowDate">Sowing date</label>
+          <input id="sowDate" type="date">
+        </div>
+        <button class="btn btn-primary" id="growBtn" style="justify-content:center">🌱 Estimate harvest</button>
+      </div>
+      <div class="grow-result" id="growResult" role="status" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <!-- TASTING NOTES -->
+  <section id="notes">
+    <div class="section-head">
+      <span class="eyebrow">Your almanac</span>
+      <h2>Tasting &amp; growing notes</h2>
+      <p>Jot down how a variety tasted, how your crop grew, or a dressing you loved. Notes are saved to the cloud and shared with fellow leaf-lovers who visit.</p>
+    </div>
+    <form class="note-form" id="noteForm">
+      <div>
+        <label for="noteTitle" style="font-weight:700;font-size:.9rem;display:block;margin-bottom:.3rem">Title</label>
+        <input id="noteTitle" type="text" placeholder="e.g. Little Gem — sweet & crunchy" required maxlength="80">
+      </div>
+      <div>
+        <label for="noteBody" style="font-weight:700;font-size:.9rem;display:block;margin-bottom:.3rem">Your note</label>
+        <textarea id="noteBody" rows="3" placeholder="What did you notice? How did it grow or taste?" required maxlength="800"></textarea>
+      </div>
+      <button class="btn btn-primary" type="submit" style="justify-content:center">💚 Save note</button>
+      <div class="save-status" id="saveStatus"></div>
+    </form>
+    <div class="note-list" id="noteList"></div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section>
+    <div class="how">
+      <div class="section-head" style="margin-bottom:.5rem">
+        <span class="eyebrow">Behind the leaves</span>
+        <h2>How it works</h2>
+      </div>
+      <ol>
+        <li><strong>Explore &amp; search:</strong> browse the variety collection, filter by type, or search by name and flavour to find your leaf.</li>
+        <li><strong>Save favourites:</strong> tap the heart on any variety — your picks are stored in the app's cloud and remembered on every visit.</li>
+        <li><strong>Plan a planting:</strong> choose a type and sowing date, and the harvest planner estimates when to pick.</li>
+        <li><strong>Keep notes:</strong> record tasting and growing notes; they're saved permanently and shared with everyone who opens the almanac.</li>
+        <li><strong>Learn:</strong> the nutrition, kitchen and storage tabs share honest, practical wisdom — no fear, just love for good food.</li>
+      </ol>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>🥬 The Lettuce Almanac — grown with curiosity and care.</p>
+  <p class="love">Built in the spirit of one shared table: everyone welcome.</p>
+</footer>
+
+<script>
+/* ---------- DATA ---------- */
+const VARIETIES = [
+  {name:"Iceberg", type:"Crisphead", emoji:"🥬", flavour:"mild, watery, super crunchy",
+   desc:"The dense, pale globe of picnic fame. Neutral in flavour, it's prized for cool crunch and holding up in sandwiches.",
+   days:"70–80 days", sun:"Full sun"},
+  {name:"Little Gem", type:"Romaine", emoji:"🌿", flavour:"sweet, nutty, crisp",
+   desc:"A petite cos with sweet hearts. Perfect halved and grilled, or as sturdy cups for fillings.",
+   days:"55–65 days", sun:"Full/part sun"},
+  {name:"Butterhead (Bibb)", type:"Butterhead", emoji:"🥬", flavour:"soft, buttery, delicate",
+   desc:"Loose, tender rosettes that melt in the mouth. Wonderful raw with a light vinaigrette or as wraps.",
+   days:"45–55 days", sun:"Part sun"},
+  {name:"Romaine / Cos", type:"Romaine", emoji:"🥗", flavour:"crisp, faintly bitter",
+   desc:"Tall, upright leaves with a firm rib — the backbone of a proper Caesar salad and warm dishes.",
+   days:"60–70 days", sun:"Full sun"},
+  {name:"Red Leaf", type:"Loose-leaf", emoji:"🍃", flavour:"mild, tender, slightly earthy",
+   desc:"Ruffled leaves blushing burgundy at the tips. Colourful, soft and quick to grow.",
+   days:"40–50 days", sun:"Part sun"},
+  {name:"Green Oakleaf", type:"Loose-leaf", emoji:"🌱", flavour:"mild, buttery, gentle",
+   desc:"Lobed, oak-shaped leaves with a soft texture. A cut-and-come-again favourite for the windowsill.",
+   days:"40–50 days", sun:"Part sun"},
+  {name:"Lollo Rosso", type:"Loose-leaf", emoji:"🍃", flavour:"mildly bitter, decorative",
+   desc:"Frilly, deeply ruffled crimson leaves that add drama and gentle bitterness to any bowl.",
+   days:"50–55 days", sun:"Part sun"},
+  {name:"Batavia (French Crisp)", type:"Crisphead", emoji:"🥬", flavour:"crunchy, sweet, robust",
+   desc:"A looser crisphead bridging iceberg and leaf types. Heat-tolerant and slow to bolt.",
+   days:"55–65 days", sun:"Full sun"},
+  {name:"Celtuce (Stem Lettuce)", type:"Stem", emoji:"🌿", flavour:"nutty stem, mild leaves",
+   desc:"Grown for its thick, crisp stem — peeled and stir-fried in East Asian kitchens. A lettuce beyond the salad bowl.",
+   days:"70–85 days", sun:"Full sun"},
+  {name:"Rocket-blend friend: Frisée", type:"Loose-leaf", emoji:"🥗", flavour:"pleasantly bitter, curly",
+   desc:"A curly endive cousin often bundled with lettuce. Bitter-sweet and lovely wilted with warm dressing.",
+   days:"70–80 days", sun:"Full/part sun"},
+];
+const TYPES = ["All", ...Array.from(new Set(VARIETIES.map(v=>v.type)))];
+
+/* ---------- STATE ---------- */
+let favourites = new Set();
+let activeType = "All";
+let searchTerm = "";
+
+/* ---------- FAVOURITES via factory ---------- */
+async function loadFavourites(){
+  try{
+    if(window.factory){
+      const docs = await factory.list("lettuce_favourites");
+      docs.forEach(d=>favourites.add(d.name || d.id));
+    }
+  }catch(e){ /* offline cache below */ }
+  try{
+    const cached = JSON.parse(localStorage.getItem("lettuce_favs")||"[]");
+    cached.forEach(n=>favourites.add(n));
+  }catch(e){}
+}
+async function toggleFavourite(name){
+  const id = name.replace(/[^a-z0-9]/gi,"_").toLowerCase();
+  if(favourites.has(name)){
+    favourites.delete(name);
+    try{ if(window.factory) await factory.remove("lettuce_favourites", id); }catch(e){}
+  }else{
+    favourites.add(name);
+    try{ if(window.factory) await factory.put("lettuce_favourites", id, {name, when:Date.now()}); }catch(e){}
+  }
+  localStorage.setItem("lettuce_favs", JSON.stringify([...favourites]));
+  renderVarieties();
+}
+
+/* ---------- RENDER VARIETIES ---------- */
+function renderFilters(){
+  const bar = document.getElementById("filterBar");
+  bar.innerHTML = "";
+  TYPES.forEach(t=>{
+    const b = document.createElement("button");
+    b.className = "chip" + (t===activeType?" active":"");
+    b.textContent = t;
+    b.setAttribute("aria-pressed", t===activeType);
+    b.onclick = ()=>{ activeType=t; renderFilters(); renderVarieties(); };
+    bar.appendChild(b);
+  });
+}
+function renderVarieties(){
+  const grid = document.getElementById("varietyGrid");
+  const term = searchTerm.trim().toLowerCase();
+  const list = VARIETIES.filter(v=>{
+    const typeOk = activeType==="All" || v.type===activeType;
+    const searchOk = !term || (v.name+" "+v.flavour+" "+v.desc+" "+v.type).toLowerCase().includes(term);
+    return typeOk && searchOk;
+  });
+  grid.innerHTML = "";
+  if(list.length===0){
+    grid.innerHTML = '<p class="empty">No lettuce matches that search yet — try another leaf. 🍃</p>';
+    return;
+  }
+  list.forEach(v=>{
+    const on = favourites.has(v.name);
+    const card = document.createElement("article");
+    card.className = "card";
+    card.innerHTML = `
+      <div class="emoji-top" aria-hidden="true">${v.emoji}</div>
+      <div class="body">
+        <h3>${v.name}</h3>
+        <div class="tag">${v.type}</div>
+        <p class="desc">${v.desc}</p>
+        <div class="meta">
+          <span>🌿 ${v.flavour}</span>
+          <span>⏳ ${v.days}</span>
+          <span>☀️ ${v.sun}</span>
+        </div>
+        <button class="fav-btn${on?" on":""}" aria-pressed="${on}">
+          ${on?"💚 Favourited":"🤍 Save favourite"}
+        </button>
+      </div>`;
+    card.querySelector(".fav-btn").onclick = ()=>toggleFavourite(v.name);
+    grid.appendChild(card);
+  });
+}
+document.getElementById("search").addEventListener("input", e=>{
+  searchTerm = e.target.value; renderVarieties();
+});
+
+/* ---------- TABS ---------- */
+document.getElementById("tabRow").addEventListener("click", e=>{
+  const btn = e.target.closest(".tab");
+  if(!btn) return;
+  document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
+  document.querySelectorAll(".tab-content").forEach(c=>c.classList.remove("show"));
+  btn.classList.add("active");
+  document.getElementById("tab-"+btn.dataset.tab).classList.add("show");
+});
+
+/* ---------- GROW CALCULATOR ---------- */
+document.getElementById("growBtn").addEventListener("click", ()=>{
+  const days = parseInt(document.getElementById("growType").value,10);
+  const sow = document.getElementById("sowDate").value;
+  const out = document.getElementById("growResult");
+  if(!sow){
+    out.className = "grow-result show";
+    out.innerHTML = "Please choose a sowing date first. 🌱";
+    return;
+  }
+  const sd = new Date(sow+"T00:00:00");
+  const hd = new Date(sd.getTime() + days*86400000);
+  const fmt = d=>d.toLocaleDateString(undefined,{weekday:'long', day:'numeric', month:'long', year:'numeric'});
+  const typeText = document.getElementById("growType").selectedOptions[0].text.split(" — ")[0];
+  out.className = "grow-result show";
+  out.innerHTML = `Sow your <strong>${typeText}</strong> on <strong>${fmt(sd)}</strong> and you can expect the first tender harvest around<br><strong>${fmt(hd)}</strong> 🥗<br><span style="font-size:.9rem;color:#4a5a38">That's about ${days} days of patient care — pick outer leaves early for a longer, kinder harvest.</span>`;
+});
+// default sow date = today
+document.getElementById("sowDate").value = new Date().toISOString().slice(0,10);
+
+/* ---------- NOTES via factory ---------- */
+const noteList = document.getElementById("noteList");
+const saveStatus = document.getElementById("saveStatus");
+
+async function loadNotes(){
+  let notes = [];
+  try{
+    if(window.factory){ notes = await factory.list("lettuce_notes"); }
+  }catch(e){
+    noteList.innerHTML = '<p class="empty">Could not load shared notes right now. Your new notes will still save when you add them.</p>';
+  }
+  renderNotes(notes);
+}
+function renderNotes(notes){
+  noteList.innerHTML = "";
+  if(!notes.length){
+    noteList.innerHTML = '<p class="empty">No notes yet — be the first to share a leafy discovery. 🌿</p>';
+    return;
+  }
+  notes.forEach(n=>{
+    const div = document.createElement("div");
+    div.className = "note";
+    const when = n.when ? new Date(n.when).toLocaleDateString(undefined,{day:'numeric',month:'short',year:'numeric'}) : "";
+    div.innerHTML = `
+      <h4></h4>
+      <div class="when">${when}</div>
+      <p></p>
+      <button class="del">Delete</button>`;
+    div.querySelector("h4").textContent = n.title || "Untitled";
+    div.querySelector("p").textContent = n.body || "";
+    div.querySelector(".del").onclick = async ()=>{
+      try{ if(window.factory) await factory.remove("lettuce_notes", n.id); }catch(e){}
+      loadNotes();
+    };
+    noteList.appendChild(div);
+  });
+}
+document.getElementById("noteForm").addEventListener("submit", async e=>{
+  e.preventDefault();
+  const title = document.getElementById("noteTitle").value.trim();
+  const body = document.getElementById("noteBody").value.trim();
+  if(!title || !body) return;
+  const id = String(Date.now());
+  saveStatus.textContent = "Saving…";
+  try{
+    if(window.factory){
+      await factory.put("lettuce_notes", id, {id, title, body, when:Date.now()});
+      saveStatus.textContent = "Saved 💚";
+    }else{
+      saveStatus.textContent = "Saved locally 💚";
+    }
+  }catch(err){
+    saveStatus.textContent = "Couldn't save — please try again.";
+    return;
+  }
+  document.getElementById("noteForm").reset();
+  setTimeout(()=>saveStatus.textContent="", 2500);
+  loadNotes();
+});
+
+/* ---------- INIT ---------- */
+(async function init(){
+  renderFilters();
+  await loadFavourites();
+  renderVarieties();
+  await loadNotes();
+})();
+</script>
+<div id="factory-provenance" style="padding:14px 16px;text-align:center;font:11px/1.7 system-ui,sans-serif;color:#888;opacity:.85;">&#9874; Built with <a href="https://factory-the-factory-ui.netlify.app" style="color:#888;">The Factory</a> using third-party AI tools &#183; the app owner is responsible for its content &#183; Standard: UK law, aligned with the UN Universal Declaration of Human Rights &#183; <a href="https://factory-the-factory-ui.netlify.app/terms.html" style="color:#888;">Terms</a></div>
+</body>
+</html>
